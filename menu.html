@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Impostor</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main id="menu-principal">
+    <h1>El Impostor</h1>
+
+    <section id="config-jugadores">
+      <label for="cantidad-jugadores">Cantidad de jugadores</label>
+      <input type="number" id="cantidad-jugadores" min="3" max="15" value="3">
+    </section>
+
+    <section id="nombres-jugadores">
+      <h2>Nombres</h2>
+      <!-- Acá vas a generar los inputs con JS según la cantidad -->
+      <div id="lista-nombres"></div>
+    </section>
+
+    <button id="btn-empezar" type="button">Empezar partida</button>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
