@@ -8,21 +8,53 @@
 </head>
 <body>
 
-  <main id="menu-principal">
-    <h1>El Impostor</h1>
+  <main>
+    <!-- ================= MENÚ PRINCIPAL ================= -->
+    <section id="menu-principal">
+      <h1>El Impostor</h1>
 
-    <section id="config-jugadores">
-      <label for="cantidad-jugadores">Cantidad de jugadores</label>
-      <input type="number" id="cantidad-jugadores" min="3" max="15" value="3">
+      <section id="config-jugadores">
+        <label for="cantidad-jugadores">Cantidad de jugadores</label>
+        <input type="number" id="cantidad-jugadores" min="3" max="15" value="3">
+      </section>
+
+      <section id="nombres-jugadores">
+        <h2>Nombres</h2>
+        <!-- Acá vas a generar los inputs con JS según la cantidad -->
+        <div id="lista-nombres"></div>
+      </section>
+
+      <button id="btn-empezar" type="button">Empezar partida</button>
     </section>
 
-    <section id="nombres-jugadores">
-      <h2>Nombres</h2>
-      <!-- Acá vas a generar los inputs con JS según la cantidad -->
-      <div id="lista-nombres"></div>
-    </section>
+    <!-- ================= REPARTO DE CARTAS ================= -->
+    <section id="pantalla-juego" hidden>
+      <p class="juego-progreso">
+        Jugador <span id="numero-jugador">1</span> de <span id="total-jugadores">3</span>
+      </p>
 
-    <button id="btn-empezar" type="button">Empezar partida</button>
+      <!-- La carta es un botón para que funcione también con teclado -->
+      <button type="button" class="carta" id="carta-jugador" aria-label="Tocá la carta para ver tu palabra">
+        <span class="carta-interior">
+          <!-- Frente: nombre del jugador -->
+          <span class="carta-cara carta-frente">
+            <span class="carta-icono" aria-hidden="true">?</span>
+            <span class="carta-nombre" id="carta-nombre">Jugador 1</span>
+            <span class="carta-instruccion">Tocá para ver tu palabra</span>
+          </span>
+
+          <!-- Reverso: la palabra (por ahora en blanco) -->
+          <span class="carta-cara carta-reverso">
+            <span class="carta-etiqueta">Tu palabra</span>
+            <span class="carta-palabra" id="palabra-secreta"></span>
+          </span>
+        </span>
+      </button>
+
+      <button type="button" id="btn-siguiente" class="btn-siguiente" hidden>
+        Siguiente jugador
+      </button>
+    </section>
   </main>
 
   <script src="script.js"></script>

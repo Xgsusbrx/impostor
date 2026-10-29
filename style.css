@@ -1,0 +1,401 @@
+/* ============================================================
+   EL IMPOSTOR - Hoja de estilos principal
+   ------------------------------------------------------------
+   Índice:
+   1. Variables (colores, sombras, radios)
+   2. Reset y base
+   3. Layout general
+   4. Menú principal
+   5. Configuración de jugadores
+   6. Lista de nombres
+   7. Botones
+   8. Pantalla de reparto
+   9. Carta 3D (frente y reverso)
+   10. Estados y responsive
+   ============================================================ */
+
+/* ---------- 1. Variables ---------- */
+:root {
+  --color-fondo: #0f1020;
+  --color-fondo-degradado: #1a1030;
+  --color-superficie: #1c1d33;
+  --color-superficie-alta: #262844;
+  --color-borde: #35375a;
+
+  --color-texto: #eef0ff;
+  --color-texto-suave: #9b9ec4;
+
+  --color-acento: #e63946;
+  --color-acento-hover: #ff4d5e;
+  --color-exito: #2ec4b6;
+
+  --fuente-base: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --radio-sm: 8px;
+  --radio-md: 12px;
+  --radio-lg: 20px;
+
+  --sombra: 0 10px 30px rgba(0, 0, 0, 0.45);
+  --transicion: 0.2s ease;
+}
+
+/* ---------- 2. Reset y base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: var(--fuente-base);
+  color: var(--color-texto);
+
+  background: radial-gradient(
+      circle at 20% 0%,
+      var(--color-fondo-degradado),
+      transparent 60%
+    ),
+    var(--color-fondo);
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* El atributo hidden siempre gana, aunque el elemento tenga display: flex */
+[hidden] {
+  display: none !important;
+}
+
+/* ---------- 3. Layout general ---------- */
+main {
+  width: 100%;
+  max-width: 480px;
+  padding: 2rem;
+  background-color: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra);
+}
+
+/* Cada pantalla se apila en columna */
+#menu-principal,
+#pantalla-juego {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ---------- 4. Menú principal ---------- */
+h1 {
+  font-size: clamp(2rem, 8vw, 2.8rem);
+  text-align: center;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-acento);
+  text-shadow: 0 0 24px rgba(230, 57, 70, 0.45);
+}
+
+h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-texto-suave);
+}
+
+/* ---------- 5. Configuración de jugadores ---------- */
+#config-jugadores {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#config-jugadores label {
+  font-size: 0.9rem;
+  color: var(--color-texto-suave);
+}
+
+/* ---------- 6. Lista de nombres ---------- */
+#nombres-jugadores {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+#lista-nombres {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Inputs en general (número y texto) */
+input {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--color-texto);
+
+  background-color: var(--color-superficie-alta);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-sm);
+
+  transition: border-color var(--transicion), box-shadow var(--transicion);
+}
+
+input::placeholder {
+  color: var(--color-texto-suave);
+}
+
+input:hover {
+  border-color: var(--color-acento);
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--color-acento);
+  box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.25);
+}
+
+/* ---------- 7. Botones ---------- */
+button {
+  width: 100%;
+  padding: 0.85rem 1.2rem;
+
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #fff;
+
+  background-color: var(--color-acento);
+  border: none;
+  border-radius: var(--radio-md);
+  cursor: pointer;
+
+  transition: background-color var(--transicion), transform var(--transicion);
+}
+
+button:hover {
+  background-color: var(--color-acento-hover);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+button:focus-visible {
+  outline: 2px solid var(--color-texto);
+  outline-offset: 3px;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ---------- 8. Pantalla de reparto ---------- */
+.juego-progreso {
+  text-align: center;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-texto-suave);
+}
+
+.juego-progreso span {
+  font-weight: 700;
+  color: var(--color-texto);
+}
+
+/* Botón de la pantalla de reparto */
+.btn-siguiente {
+  animation: aparecer 0.25s ease;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- 9. Carta 3D ---------- */
+.carta {
+  /* Resetea los estilos generales de button */
+  display: block;
+  width: 100%;
+  height: clamp(280px, 46vh, 400px);
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: var(--radio-lg);
+  text-transform: none;
+  letter-spacing: normal;
+  color: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+
+  /* Necesario para el efecto 3D */
+  perspective: 1200px;
+}
+
+.carta:hover,
+.carta:active {
+  background: none;
+  transform: none;
+}
+
+.carta:focus-visible {
+  outline: 2px solid var(--color-texto);
+  outline-offset: 4px;
+}
+
+.carta-interior {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+/* Mientras se reinicia la carta (al pasar de jugador) sin animación */
+.carta.sin-transicion .carta-interior {
+  transition: none;
+}
+
+.carta.volteada .carta-interior {
+  transform: rotateY(180deg);
+}
+
+.carta-cara {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1.5rem;
+
+  border-radius: var(--radio-lg);
+  text-align: center;
+  overflow: hidden;
+
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Frente: color propio de cada jugador */
+.carta-frente {
+  color: var(--color-texto-carta, #fff);
+  background-color: var(--color-carta, var(--color-acento));
+  background-image: linear-gradient(
+    150deg,
+    var(--color-carta, var(--color-acento)) 0%,
+    color-mix(in srgb, var(--color-carta, var(--color-acento)) 45%, #0b0c18) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.carta-icono {
+  display: grid;
+  place-items: center;
+  width: 3.2rem;
+  height: 3.2rem;
+
+  font-size: 1.7rem;
+  font-weight: 800;
+  line-height: 1;
+
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  opacity: 0.9;
+}
+
+.carta-nombre {
+  font-size: clamp(1.5rem, 6vw, 2rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  word-break: break-word;
+}
+
+.carta-instruccion {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  opacity: 0.85;
+}
+
+/* Reverso: la palabra secreta */
+.carta-reverso {
+  transform: rotateY(180deg);
+  color: var(--color-texto);
+  background-color: var(--color-superficie-alta);
+  background-image: radial-gradient(
+    circle at 50% 35%,
+    color-mix(in srgb, var(--color-carta, var(--color-acento)) 32%, transparent),
+    transparent 70%
+  );
+  border: 1px solid var(--color-carta, var(--color-acento));
+}
+
+.carta-etiqueta {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-texto-suave);
+}
+
+.carta-palabra {
+  min-height: 1.3em;
+  font-size: clamp(1.8rem, 8vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  word-break: break-word;
+}
+
+/* ---------- 10. Estados y responsive ---------- */
+@media (max-width: 400px) {
+  main {
+    padding: 1.5rem;
+  }
+
+  .carta-cara {
+    padding: 1.2rem;
+  }
+}
+
+/* Respeta a quien prefiere menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .carta-interior,
+  .btn-siguiente {
+    transition: none;
+    animation: none;
+  }
+}
